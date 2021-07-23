@@ -11,7 +11,16 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
 
+        // compact() creates an array from variables and their values
         return view('projects.index', compact('projects'));
+    }
+
+    public function show(Project $project)
+    {
+        // works without this line
+        // $project = Project::findOrFail(request('project'));
+
+        return view('projects.show', compact('project'));
     }
 
     public function store()

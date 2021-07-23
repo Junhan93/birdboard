@@ -39,6 +39,20 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_view_a_project()
+    {
+        // disable exception handling so we can see what is going on
+        $this->withoutExceptionHandling();
+
+        $project = Project::factory()->create();
+
+        // get projects by id and test title and description
+        $this->get($project->path())
+            ->assertSee($project->title)
+            ->assertSee($project->description);
+    }
+
+    /** @test */
     public function a_project_requires_a_title()
     {
         $attributes = Project::factory()->raw(['title' => '']);
